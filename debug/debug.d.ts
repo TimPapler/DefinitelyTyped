@@ -1,3 +1,12 @@
-declare  module "debug" {
-    export = function begin(mode:string):(...args)=>void
+
+interface Logger {
+    (...args):void;
+}
+interface Debug {
+    (s:string):Logger;
+}
+
+declare var c:Debug;
+declare module "debug" {
+    export = c;
 }
