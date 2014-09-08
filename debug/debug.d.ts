@@ -1,12 +1,12 @@
 
-interface Logger {
-    (...args):void;
+declare function Debug(s:string): Debug;
+declare module Debug {
 }
 interface Debug {
-    (s:string):Logger;
+    (...args):void;
+
 }
 
-declare var c:Debug;
 declare module "debug" {
-    export = c;
+export = Debug;
 }

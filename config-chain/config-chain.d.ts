@@ -1,27 +1,28 @@
 
-declare class Config {
-    static env(prefix:string, env?);
-    static find(find:string);
-    static json(...args);
-    static ConfigChain():Config;
-    static parse(content, file, type);
-    public get(s:string, name?:string);
-    public set(key, value, name);
-    public add(object, name?);
-    public addUrl(url, type, name?);
-    public addEnv(prefix, env, name?);
-    public addString(data, file, type, name?);
-    public root:Object;
-    public store:any;
-    public save(name:string,type);
-    public sources:any;
-    public addFile(filename, type, name?);
-    public on(e:string, cb);
-    constructor(...args);
+
+declare function ConfigChain(...args): ConfigChain;
+declare module ConfigChain {
+    function env(prefix:string, env?);
+    function find(find:string);
+    function json(...args);
+    function ConfigChain():ConfigChain;
+    function parse(content, file, type);
+}
+interface ConfigChain {
+    get(s:string, name?:string):any;
+    set(key, value, name);
+    add(object, name?);
+    addUrl(url, type, name?);
+    addEnv(prefix, env, name?);
+    addString(data, file, type, name?);
+    root:Object;
+    store:any;
+    save(name:string,type);
+    sources:any;
+    addFile(filename, type, name?);
+    on(e:string, cb);
 }
 
-declare var c:Config;
-
 declare module "config-chain" {
-export = c;
+    export = ConfigChain;
 }
