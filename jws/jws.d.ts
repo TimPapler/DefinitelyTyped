@@ -1,10 +1,7 @@
-/**
- * Created by tim on 05/09/14.
- */
-
-
+/// <reference path="../node/node.d.ts" />
 
 declare module jws {
+    import Stream = require('stream');
     export class VerifyStream extends Stream {
         verify():boolean;
     }
