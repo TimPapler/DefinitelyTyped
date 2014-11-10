@@ -411,6 +411,25 @@ declare module Rx {
 		fromItreable<T>(generator: () => { next(): { done: boolean; value?: T; }; }, scheduler?: IScheduler): Observable<T>;
 
 		/**
+		 * Converts a Node.js callback style function to an observable sequence.  This must be in function (err, ...) format.
+		 * @param {Function} func The function to call
+		 * @param {Mixed} [context] The context for the func parameter to be executed.  If not specified, defaults to undefined.
+		 * @param {Function} [selector] A selector which takes the arguments from the callback minus the error to produce a single item to yield on next.
+		 * @returns {Function} An async function which when applied, returns an observable sequence with the callback arguments as an array.
+		 */
+		fromNodeCallback<T>(func:Function, context?:any, selector?:Function) :(...args: any[]) => Observable<T>;
+
+
+		/**
+		 *  Concatenates the observable sequences obtained by running the specified result selector for each element in source.
+		 * There is an alias for this method called 'forIn' for browsers <IE9
+		 * @param {Array} sources An array of values to turn into an observable sequence.
+		 * @param {Function} resultSelector A function to apply to each item in the sources array to turn it into an observable sequence.
+		 * @returns {Observable} An observable sequence from the concatenated observable sequences.
+		 */
+		for<T>(array:Array<any>, selector:Function, thisArg?:any ):Observable<T>;
+		
+		/**
 		*  Converts an iterable into an Observable sequence
 		*  
 		* @example
